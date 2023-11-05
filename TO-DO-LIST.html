@@ -4,16 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TO-DO-LIST-HTML</title>
+    <link rel="stylesheet" href="TO-DO-LIST.css">
 </head>
 <body>
     <div id="todo-container">
-<h1>To Do LIST</h1>
-<input type="text" name="" id="taskinput" placeholder="New task">
-
-<button onclick="addTask()">ADD</button>
-<button onclick="clearall()">ALL clear</button>
-
-<ul id="tasklist()"> </ul>
+        <h1>To Do LIST</h1>
+        <input type="text" id="taskinput" placeholder="New task">
+        <button onclick="addTask()">ADD</button>
+        <button onclick="clearall()">ALL clear</button>
+        <ul id="taskList"></ul>
     </div>
+<!---------------------------------CSS elements----------------------------------------->
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+<div class="content">
+  <h1 style>Made By Nikhil Joshi</h1>
+</div>
+
+    <!------------------------SCRIPT------------------------------>
+    <script src="your-javascript-file.js"></script>
+
+    <script src="TO-DO-LIST_J.js">
+        // JavaScript to store new tasks
+const task = [];
+
+// Function to add new tasks
+function addTask() {
+    const taskInput = document.getElementById("taskinput").value;
+
+    if (taskInput === "") {
+        alert("Please Enter a task");
+        return;
+    }
+
+    // Convert the task to tasks array
+    task.push(taskInput);
+
+    // Clear input
+    document.getElementById("taskinput").value = "";
+
+    // Update the task list
+    updateTaskList();
+}
+
+// Function to remove a task
+function removetask(index) {
+    // Remove the task from the tasks array
+    task.splice(index, 1);
+
+    updateTaskList();
+}
+
+// Function to clear all tasks
+function clearall() {
+    task.length = 0;
+
+    updateTaskList();
+}
+
+// Function to update the task list in the DOM
+function updateTaskList() {
+    const taskList = document.getElementById("taskList");
+    taskList.innerHTML = "";
+
+    for (let i = 0; i < task.length; i++) {
+        const listItem = document.createElement("li");
+        const taskText = document.createTextNode(task[i]);
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+        removeButton.className = "remove-button";
+        removeButton.onclick = function () {
+            removetask(i);
+        };
+        listItem.appendChild(taskText);
+        listItem.appendChild(removeButton);
+        taskList.appendChild(listItem);
+    }
+}
+
+    </script>
 </body>
 </html>
